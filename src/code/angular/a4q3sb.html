@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Employee information</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body ng-controller="EmployeeController">
+    <h1>Employee Details</h1>
+    <label for="searchName">Search By Name: </label>
+    <input type="text" ng-model="searchName"><br><br>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+        </tr>
+        <tr ng-repeat="employee in employees | orderBy: 'salary' | filter: searchName">
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.salary }}</td>
+        </tr>
+    </table>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("EmployeeController", function ($scope) {
+            $scope.employees = [
+                { name: "John Doe", position: "Manager", salary: 110000 },
+                { name: "Jane Smith", position: "Developer", salary: 105000 },
+                { name: "Mike Johnson", position: "Designer", salary: 85000 },
+                { name: "Emily Davis", position: "Data Analyst", salary: 90000 },
+                { name: "David Anderson", position: "Automation Tester", salary: 95000 },
+                { name: "Sarah Wilson", position: "Senior Developer", salary: 135000 },
+                { name: "Michael Brown", position: "Chief Engineer", salary: 150000 },
+                { name: "Jessica Taylor", position: "Associate Developer", salary: 50000 },
+                { name: "Daniel Miller", position: "Automation Engineer", salary: 180000 },
+                { name: "Amy Moore", position: "Developer Intern", salary: 20000 }
+            ];
+        });
+    </script>
+</body>
+
+</html>

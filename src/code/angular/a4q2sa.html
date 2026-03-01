@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div ng-app="studentApp" ng-controller="studentController">
+        <h1>Student Information</h1>
+
+        <table>
+            <tr>
+                <th>Sr No.</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Grade</th>
+                <th>City</th>
+            </tr>
+            <tr ng-repeat="student in students | filter: {city: 'Pune'}">
+                <td>{{ $index + 1}}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.age }}</td>
+                <td>{{ student.grade }}</td>
+                <td>{{ student.city }}</td>
+                
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var app = angular.module("studentApp", []);
+        app.controller("studentController", function ($scope) {
+            $scope.students = [
+                { name: "Jack", age: 15, grade: "A", city: "Pune"},
+                { name: "Bruce", age: 17, grade: "B", city: "Baramati"},
+                { name: "Zack", age: 16, grade: "A", city: "Mumbai"},
+                { name: "Thomas", age: 14, grade: "C", city: "Gurgaon"},
+                { name: "Wayne", age: 15, grade: "A", city: "NYC"}
+            ];
+        });
+    </script>
+</body>
+</html>

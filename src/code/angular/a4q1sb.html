@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Product Rate Search</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body ng-controller="ProductController">
+    <h1>Product Rate Search</h1>
+    <input type="text" ng-model="searchRate" placeholder="Enter Rate To Search"><br><br>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Rate</th>
+        </tr>
+        <tr ng-repeat="product in products | filter: { rate: searchRate }">
+            <td>{{ product.name }}</td>
+            <td>{{ product.rate | currency }}</td>
+        </tr>
+    </table>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("ProductController", function ($scope) {
+            $scope.products = [
+                { name: "Product A", rate: 9.99 },
+                { name: "Product B", rate: 19.99 },
+                { name: "Product C", rate: 14.99 },
+                { name: "Product D", rate: 24.99 },
+                { name: "Product E", rate: 12.99 },
+                { name: "Product F", rate: 29.99 },
+                { name: "Product G", rate: 9.99 },
+                { name: "Product H", rate: 19.99 },
+                { name: "Product I", rate: 14.99 },
+                { name: "Product J", rate: 24.99 },
+            ];
+        });
+    </script>
+</body>
+
+</html>
