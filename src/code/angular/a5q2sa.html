@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html ng-app="studentApp">
+
+<head>
+    <title>Student Registration Form using AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .error {
+            color: red;
+        }
+
+        input.ng-invalid.ng-touched,
+        textarea.ng-invalid.ng-touched {
+            border-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-controller="StudentController">
+        <h2>Student Registration Form</h2>
+        <form name="studentForm" ng-submit="registerStudent()" novalidate>
+            <!-- Student Name -->
+            <label>Student Name:</label><br>
+            <input type="text" name="name" ng-model="student.name" required>
+            <span class="error" ng-show="studentForm.name.$touched &&
+studentForm.name.$invalid">
+                Name is required
+            </span><br><br>
+            <!-- Roll Number -->
+            <label>Roll Number:</label><br>
+            <input type="text" name="rollno" ng-model="student.rollno" ng-pattern="/^[0-9]+$/" required>
+            <span class="error" ng-show="studentForm.rollno.$touched &&
+studentForm.rollno.$invalid">
+                Valid Roll Number is required
+            </span><br><br>
+            <!-- Address -->
+            <label>Address:</label><br>
+            <textarea name="address" ng-model="student.address" required></textarea>
+            <span class="error" ng-show="studentForm.address.$touched &&
+studentForm.address.$invalid">
+                Address is required
+            </span><br><br>
+            <!-- Email -->
+            <label>Email:</label><br>
+            <input type="email" name="email" ng-model="student.email" required>
+            <span class="error" ng-show="studentForm.email.$touched &&
+studentForm.email.$invalid">
+                Enter a valid email
+            </span><br><br>
+            <!-- Phone -->
+            <label>Phone Number:</label><br>
+            <input type="text" name="phone" ng-model="student.phone" ng-pattern="/^[0-9]{10}$/" required>
+            <span class="error" ng-show="studentForm.phone.$touched &&
+studentForm.phone.$invalid">
+                Enter 10-digit phone number
+            </span><br><br>
+            <!-- Course -->
+            <label>Course:</label><br>
+            <select name="course" ng-model="student.course" required>
+                <option value="">--Select Course--</option>
+                <option>BCA</option>
+                <option>BSc</option>
+                <option>BCOM</option>
+                <option>BA</option>
+            </select>
+            <span class="error" ng-show="studentForm.course.$touched &&
+studentForm.course.$invalid">
+                Course is required
+            </span><br><br>
+            <button type="submit" ng-disabled="studentForm.$invalid">
+                Register
+            </button>
+        </form>
+        <!-- Display Registered Student -->
+        <div ng-show="isRegistered">
+            <h3>Registration Successful!</h3>
+            <p><b>Name:</b> {{ student.name }}</p>
+            <p><b>Roll No:</b> {{ student.rollno }}</p>
+            <p><b>Address:</b> {{ student.address }}</p>
+            <p><b>Email:</b> {{ student.email }}</p>
+            <p><b>Phone:</b> {{ student.phone }}</p>
+            <p><b>Course:</b> {{ student.course }}</p>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('studentApp', []);
+        app.controller('StudentController', function ($scope) {
+            $scope.student = {};
+            $scope.isRegistered = false;
+            $scope.registerStudent = function () {
+                if ($scope.studentForm.$valid) {
+                    $scope.isRegistered = true;
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

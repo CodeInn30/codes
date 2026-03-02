@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="formApp">
+
+<head>
+    <title>AngularJS Form Directive and Handling Form Submission.</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-controller="FormController">
+        <h2>Contact Us:-</h2>
+        <form name="contactForm" ng-submit="submitForm()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" ng-model="name" required><br><br>
+            <label for="email">email:</label>
+            <input type="email" id="email" name="email" ng-model="email" required><br><br>
+            <label for="message">Please put your Message:</label>
+            <textarea id="message" name="message" ng-model="message" required></textarea><br><br>
+            <button type="submit">Submit</button>
+        </form>
+        <div ng-show="formSubmitted">
+            <h3>Your Information </h3>
+            <p>Name: {{ name }}</p>
+            <p>Email: {{ email }}</p>
+            <p>Message: {{ message }}</p>
+        </div>
+    </div>
+    <script>
+        var app = angular.module('formApp', []);
+        app.controller('FormController', function ($scope) {
+            $scope.formSubmitted = false;
+            $scope.submitForm = function () {
+                if ($scope.contactForm.$valid) {
+                    $scope.formSubmitted = true;
+                }
+            };
+        });
+    </script>
+</body>
+</html>

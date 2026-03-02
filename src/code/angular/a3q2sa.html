@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Student Report Card</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: 2px solid;
+            padding: 5px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body ng-controller="studentController">
+    <h1>Student Report Card</h1>
+    <table>
+        <tr>
+            <td>First Name: </td>
+            <td><input type="text" ng-model="student.firstName"></td>
+        </tr>
+        <tr>
+            <td>last Name: </td>
+            <td><input type="text" ng-model="student.lastName"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><b>Enter Marks: </b></td>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td><input type="number" ng-model="marks.m1"></td>
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td><input type="number" ng-model="marks.m2"></td>
+        </tr>
+        <tr>
+            <td>Mathematics</td>
+            <td><input type="number" ng-model="marks.m3"></td>
+        </tr>
+        <tr>
+            <td>Biology</td>
+            <td><input type="number" ng-model="marks.m4"></td>
+        </tr>
+        <tr>
+            <td>English</td>
+            <td><input type="number" ng-model="marks.m5"></td>
+        </tr>
+    </table>
+    <br>
+    <button ng-click="calculate()">Display</button><br>
+    <br>
+    <table ng-if="total">
+        <tr>
+            <td colspan="3"><b>Marks Card: </b></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td colspan="2">{{ student.firstName }} {{ student.lastName }}</td>
+        </tr>
+        <tr>
+            <th>Subject</th>
+            <th>Marks</th>
+        </tr>
+        <tr>
+            <td>Physics</td>
+            <td>{{ marks.m1 }}</td>
+        </tr>
+        <tr>
+            <td>Chemistry</td>
+            <td>{{ marks.m2 }}</td>
+        </tr>
+        <tr>
+            <td>Mathematics</td>
+            <td>{{ marks.m3 }}</td>
+        </tr>
+        <tr>
+            <td>Biology</td>
+            <td>{{ marks.m4 }}</td>
+        </tr>
+        <tr>
+            <td>English</td>
+            <td>{{ marks.m5 }}</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>{{ total }}</td>
+        </tr>
+        <tr>
+            <td><b>Percentage</b></td>
+            <td>{{ percentage | number:2 }} %</td>
+        </tr>
+        <tr>
+            <td><b>Grade</b></td>
+            <td>{{ grade }}</td>
+        </tr>
+    </table>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("studentController", function ($scope) {
+            $scope.student = {
+                firstName: "Anon",
+                lastName: "Alves"
+            };
+            $scope.marks = {
+                m1: 56,
+                m2: 78,
+                m3: 67,
+                m4: 92,
+                m5: 95
+            };
+            $scope.calculate = function () {
+                let total = parseInt($scope.marks.m1, 10) +
+                    parseInt($scope.marks.m2, 10) +
+                    parseInt($scope.marks.m3, 10) +
+                    parseInt($scope.marks.m4, 10) +
+                    parseInt($scope.marks.m5, 10);
+                $scope.total = total;
+                $scope.percentage = (total / 500) * 100;
+                if ($scope.percentage >= 90) {
+                    $scope.grade = "A";
+                } else if ($scope.percentage >= 80) {
+                    $scope.grade = "B";
+                } else if ($scope.percentage >= 70) {
+                    $scope.grade = "C";
+                } else if ($scope.percentage >= 60) {
+                    $scope.grade = "D";
+                } else {
+                    $scope.grade = "F";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

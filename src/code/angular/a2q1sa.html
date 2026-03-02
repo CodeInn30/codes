@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+        <div ng-init="num1 = 0; num2 = 0; result = 0;">
+            <h1>Addition of 2 numbers</h1>
+            <label>Enter a Num 1</label>
+            <input type="number" ng-model="num1">
+            <br>
+            <label>Enter a Num 2</label>
+            <input type="number" ng-model="num2">
+            <br>
+            <button ng-click="add()">Add</button>
+            <p>Result = {{result}}</p>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myController", function ($scope) {
+            $scope.add = function () {
+                $scope.result = $scope.num1 + $scope.num2;
+            }
+        })
+    </script>
+</body>
+
+</html>

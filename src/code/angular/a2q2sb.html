@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+        <div ng-init="name=''; rollNo=0; java=0, python=0; mathematics=0; percentage=0">
+            <div>
+                <label>Enter a name</label>
+                <input type="text" ng-model="name">
+            </div><br>
+            <div>
+                <label>Enter a rollNo</label>
+                <input type="number" ng-model="rollNo">
+            </div><br>
+            <div>
+                <label>Enter a java marks</label>
+                <input type="number" ng-model="java">
+            </div><br>
+            <div>
+                <label>Enter a python marks</label>
+                <input type="number" ng-model="python">
+            </div><br>
+            <div>
+                <label>Enter a mathematics marks</label>
+                <input type="number" ng-model="mathematics">
+            </div><br>
+
+            <button ng-click="calculatePercentage()">Calculate Percentage</button>
+            <p>Percentage = {{ percentage }}</p>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myController", function ($scope) {
+            $scope.calculatePercentage = function () {
+                var total = $scope.java + $scope.python + $scope.mathematics;
+                $scope.percentage = (total / 300) * 100;
+            }
+        });
+    </script>
+</body>
+</html>

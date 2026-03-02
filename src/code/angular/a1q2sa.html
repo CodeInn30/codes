@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <p>This header will change after 3 seconds: </p>
+        <h2>{{ myHeader }}</h2>
+    </div>
+    <p>The $timeout service runs a function after a specified number
+        of milliseconds</p>
+    <script>
+        let app = angular.module("myApp", []);
+        app.controller("myCtrl", function ($scope, $timeout) {
+            $scope.myHeader = "Hello World"; $timeout(() => {
+                $scope.myHeader = "How are you today?";
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>

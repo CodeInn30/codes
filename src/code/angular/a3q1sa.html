@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Departmental Store Products</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: 2px solid;
+            padding: 5px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body ng-controller="productController">
+    <h1>Departmental Store Products</h1>
+    <table>
+        <tr>
+            <th>Sr. No.</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        <tr ng-repeat="product in products">
+            <td>{{ product.srNo }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.quantity }}</td>
+        </tr>
+    </table>
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("productController", function ($scope) {
+            $scope.products = [
+                {
+                    srNo: 1,
+                    name: "Football",
+                    price: 350,
+                    quantity: 8
+                },
+                {
+                    srNo: 2,
+                    name: "Jersey",
+                    price: 750,
+                    quantity: 12
+                },
+                {
+                    srNo: 3,
+                    name: "Stockings",
+                    price: 250,
+                    quantity: 12
+                },
+                {
+                    srNo: 4,
+                    name: "Shin Pads",
+                    price: 450,
+                    quantity: 8
+                },
+                {
+                    srNo: 5,
+                    name: "Shoes",
+                    price: 1500,
+                    quantity: 16
+                }
+            ];
+        });
+    </script>
+</body>
+
+</html>

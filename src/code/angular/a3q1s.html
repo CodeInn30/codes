@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bus eTicket Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        table,
+        tr,
+        td,
+        th {
+            border: 2px solid;
+            padding: 10px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bus eTicket Application</h1>
+    <div ng-app="mainApp" ng-controller="eTicketController">
+        <table style="border: 2px solid black;">
+            <tr>
+                <td>Enter Name: </td>
+                <td><input type="text" ng-model="name"></td>
+            </tr>
+            <tr>
+                <td>Enter Address: </td>
+                <td><input type="text" ng-model="address"></td>
+            </tr>
+            <tr>
+                <td>Enter Contact Number: </td>
+                <td><input type="number" ng-model="contact"></td>
+            </tr>
+            <tr>
+                <td>Enter Source: </td>
+                <td>
+                    <select ng-model="source">
+                        <option value=""></option>
+                        <option value="Pune">Pune</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pimpri">Pimpri</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Destination: </td>
+                <td>
+                    <select ng-model="destination">
+                        <option value="Kolhapur">Kolhapur</option>
+                        <option value="Nagpur">Nagpur</option>
+                        <option value="Satara">Satara</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Journey Date: </td>
+                <td><input type="date" ng-model="jDate"></td>
+            </tr>
+            <tr>
+                <td>Enter Passenger Names: </td>
+                <td><input type="textarea" ng-model="p1"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="p" ng-model="gender" value="Male">Male</td>
+                <td><input type="radio" name="p" ng-model="gender" value="female">Female</td>
+            </tr>
+        </table>
+        <table style="border: 2px solid black; text-align: center;">
+            <tr>
+                <td colspan="3" style="text-align: center; font-size: 25px; color: red;">Bus Ticket
+                    Reservation</td>
+            </tr>
+            <tr>
+                <td>Name: {{ name }}</td>
+                <td>Address: {{ address }}</td>
+                <td>Contact: {{ contact }}</td>
+            </tr>
+            <tr>
+                <td>Source: {{ source }}</td>
+                <td>Destination: {{ destination }}</td>
+                <td>Journey Date: {{ jDate }}</td>
+            </tr>
+            <tr>
+                <td>1<sup>st</sup> Passenger</td>
+                <td>{{ p1 }}</td>
+                <td>Gender: {{ gender }}</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var app = angular.module("mainApp", []);
+        app.controller("eTicketController", function ($scope) {
+            $scope.name = "Bruce Wayne";
+            $scope.address = "Gothan City";
+            $scope.contact = "9135871885";
+            $scope.source = "Pune";
+            $scope.destination = "Batmas's Hideout";
+            $scope.jDate = "30/02/2078"
+        });
+    </script>
+</body>
+
+</html>

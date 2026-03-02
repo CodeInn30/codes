@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Registration Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body ng-controller="RegistrationController">
+    <h1>Registration Form</h1>
+
+    <form name="registrationForm" ng-submit="submitForm()" novalidate>
+    
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" ng-model="name" required><br><br>
+        <span class="error" ng-show="registrationForm.name.$dirty && registrationForm.name.$error.required">
+            Name is required.
+        </span><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" ng-model="email" required><br><br>
+        <span class="error" ng-show="registrationForm.email.$dirty && registrationForm.email.$error.required">
+            Email is required.
+        </span>
+        <span class="error" ng-show="registrationForm.email.$dirty &&
+registrationForm.email.$error.email">
+            Invalid email format.
+        </span><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" ng-model="password" required><br><br>
+        <span class="error" ng-show="registrationForm.password.$dirty &&
+registrationForm.password.$error.required">
+            Password is required.
+        </span><br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        angular.module('myApp', [])
+            .controller('RegistrationController', function ($scope) {
+                $scope.user = {};
+                $scope.submitForm = function () {
+                    if ($scope.registrationForm.$valid) {
+                        alert('Registration successful!');
+                    } else {
+                        alert('Please fill in all required fields correctly.');
+                    }
+                };
+            });
+    </script>
+</body>
+
+</html>

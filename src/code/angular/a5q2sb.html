@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="loginApp">
+
+<head>
+    <title>Angular JS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="LoginController">
+    <div>
+        <h2>Login Form</h2>
+        <form name="loginForm" ng-submit="login()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" ng-model="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" ng-model="password" required><br><br>
+            <button type="submit" ng-disabled="loginForm.$invalid">Login</button>
+        </form>
+        <p ng-show="isLogged">Welcome, {{ username }}</p>
+        <p ng-show="!isLogged && hasTriedToLogin">Invalid credentials. Please try again.</p>
+    </div>
+    <script>
+        var app = angular.module('loginApp', []);
+        app.controller('LoginController', function ($scope) {
+            $scope.isLogged = false;
+            $scope.hasTriedToLogin = false;
+            // Simulated valid credentials
+            var validUsername = 'user@123';
+            var validPassword = 'user';
+            $scope.login = function () {
+                $scope.hasTriedToLogin = true;
+                if ($scope.username === validUsername && $scope.password === validPassword) {
+                    $scope.isLogged = true;
+                } else {
+                    $scope.isLogged = false;
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

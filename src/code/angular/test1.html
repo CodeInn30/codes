@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>Student Registration SPA</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-app="studentApp" ng-controller="studentController">
+        <h1>Student Registration SPA</h1>
+
+        <form name="studentForm" ng-submit="registerStudent()" novalidate>
+            <label for="name">Enter a Name</label>
+            <input type="text" name="name" id="name" ng-model="name" ng-pattern="/^[a-zA-Z\s]*$/" required>
+            <span class="error" ng-show="studentForm.name.$touched && studentForm.name.$invalid">
+                Name is required and name dose not consist numbers & symbol
+            </span><br><br>
+
+            <label for="email">Enter a Email</label>
+            <input type="email" id="email" name="email" ng-model="email" required>
+            <span class="error" ng-show="studentForm.email.$touched && studentForm.email.$invalid">
+                email is required
+            </span><br><br>
+
+            <label for="mobile">Enter a Mobile No</label>
+            <input type="text" name="mobile" id="mobile" ng-model="mobile" ng-pattern="/^\d{10}$/" required>
+            <span class="error" ng-show="studentForm.mobile.$touched && studentForm.mobile.$invalid">
+                mobile no is required or enter a correct 10 digit mobile no
+            </span><br><br>
+
+            <label for="pincode">Enter a Pincode</label>
+            <input type="text" name="pincode" id="pincode" ng-model="pincode" ng-pattern="/^\d{6}$/" required>
+            <span class="error" ng-show="studentForm.pincode.$touched && studentForm.pincode.$invalid">
+                pincode is required or enter a correct 6 digit pincode
+            </span><br><br>
+
+            <label for="password">Enter a Password</label>
+            <input type="text" name="password" id="password" ng-model="password" ng-minlength="8" required>
+            <span class="error" ng-show="studentForm.password.$touched && studentForm.password.$invalid">
+                password is required
+            </span><br><br>
+
+            <label for="course">Select a Cource</label>
+            <select name="course" id="course" ng-model="course" required>
+                <option value="">--Select Course--</option>
+                <option value="BCS">BSC</option>
+                <option value="BCA">BCA</option>
+                <option value="BA">BA</option>
+                <option value="BCOM">BCOM</option>
+                <option value="BBA">BBA</option>
+            </select>
+            <span class="error" ng-show="studentForm.course.$touched && studentForm.course.$invalid">
+                Select the course it is required
+            </span><br><br>
+
+            <button type="submit" ng-disabled="studentForm.$invalid">Register</button><br><br>
+        </form>
+
+        <div ng-show="isRegistered">
+            <p>Name: {{ name }}</p>
+            <p>Email: {{ email }}</p>
+            <p>Mobile: {{ mobile }}</p>
+            <p>Pincode: {{ pincode }}</p>
+            <p>Password: {{ password }}</p>
+            <p>Course: {{ course }}</p>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module("studentApp", []);
+        app.controller("studentController", function ($scope) {
+            $scope.isRegistered = false;
+            $scope.registerStudent = function () {
+                if ($scope.studentForm.$valid) {
+
+                    $scope.isRegistered = true;
+                    $scope.name = "";
+                    $scope.email = "";
+                    $scope.mobile = "";
+                    $scope.pincode = "";
+                    $scope.password = "";
+                    $scope.course = "";
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
